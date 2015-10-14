@@ -57,7 +57,7 @@ while [ -n "$did_something" ]; do
                 mkdir -p /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}
                 cp -r --preserve=links /ceph_tmp/release/Ubuntu/{conf,db,dists,pool,trusty,version} /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}
                 echo $ref > /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}/sha1
-
+                make -p /ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/
                 ln -s /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/} /ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/$ref
                 # rm -rf /ceph_tmp/release/*
                 mkdir -p /tmp-caibo/old-files/${branch}/
