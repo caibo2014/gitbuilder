@@ -54,6 +54,16 @@ while [ -n "$did_something" ]; do
 		trap "echo 'Killing (SIGINT)';  kill -TERM -$XPID; exit 1" SIGINT
 		trap "echo 'Killing (SIGTERM)'; kill -TERM -$XPID; exit 1" SIGTERM
 		wait; wait
+                mkdir -p /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}
+                cp -r --preserve=links /ceph_tmp/release/Ubuntu/{conf,db,dists,pool,trusty,version} /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}
+                echo $ref > /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}/sha1
+
+                ln -s /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/} /ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/$ref
+                # rm -rf /ceph_tmp/release/*
+                mkdir -p /tmp-caibo/old-files/${branch}/
+                # don't rm, just let
+                mv /ceph_tmp/release/* /tmp-caibo/old-files/${branch}/ 
+             
 	done
 	
 	sleep 5
