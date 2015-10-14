@@ -14,6 +14,8 @@
 
 # just use make-debs.sh
 
+cp ../make-debs.sh .
+chmod 777 make-debs.sh
 ./make-debs.sh /ceph_tmp/release
 
 # Actually build the project
