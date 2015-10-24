@@ -20,7 +20,7 @@ base=${1:-/tmp/release}
 codename=$(lsb_release -sc)
 releasedir=$base/$(lsb_release -si)/WORKDIR
 echo "we make debs in: $releasedir"
-rm -fr $releasedir
+rm -fr $releasedir/*
 mkdir -p $releasedir
 #
 # remove all files not under git so they are not
