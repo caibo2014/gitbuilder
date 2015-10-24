@@ -59,10 +59,10 @@ while [ -n "$did_something" ]; do
                 echo $ref > /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}/sha1
                 mkdir -p /ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/
                 ln -s /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/} /ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/$ref
-                # rm -rf /ceph_tmp/release/*
-                mkdir -p /tmp-caibo/old-files/${branch}/
+                rm -rf /ceph_tmp/release/*
+                # mkdir -p /tmp-caibo/old-files/${branch}/
                 # don't rm, just let
-                mv /ceph_tmp/release/* /tmp-caibo/old-files/${branch}/ 
+                # mv /ceph_tmp/release/* /tmp-caibo/old-files/${branch}/ 
              
 	done
 	
