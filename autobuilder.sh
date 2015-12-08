@@ -31,6 +31,7 @@ mkdir -p out/pass out/fail out/ignore out/errcache
 chmod a+w out/errcache
 
 did_something=1
+base_dir=~/mnt
 while [ -n "$did_something" ]; do
 	( cd build && 
 	  git remote show | timeout 60 xargs git remote prune && 
@@ -54,12 +55,12 @@ while [ -n "$did_something" ]; do
 		trap "echo 'Killing (SIGINT)';  kill -TERM -$XPID; exit 1" SIGINT
 		trap "echo 'Killing (SIGTERM)'; kill -TERM -$XPID; exit 1" SIGTERM
 		wait; wait
-                mkdir -p /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}
-                cp -r --preserve=links /ceph_tmp/release/Ubuntu/{conf,db,dists,pool,trusty,version} /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}
-                echo $ref > /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}/sha1
-                mkdir -p /ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/
-                ln -s /ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/} /ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/$ref
-                rm -rf /ceph_tmp/release/*
+                mkdir -p $base_dir/ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}
+                cp -r --preserve=links /$base_dir/ceph_tmp/release/Ubuntu/{conf,db,dists,pool,trusty,version} $base_dir/ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}
+                echo $ref > $base_dir/ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/}/sha1
+                mkdir -p $base_dir/ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/
+                ln -s $base_dir/ceph_repos/ceph-deb-trusty-x86_64-basic/ref/${branch#*/} $base_dir/ceph_repos/ceph-deb-trusty-x86_64-basic/sha1/$ref
+                rm -rf $base_dir/ceph_tmp/release/*
                 # mkdir -p /tmp-caibo/old-files/${branch}/
                 # don't rm, just let
                 # mv /ceph_tmp/release/* /tmp-caibo/old-files/${branch}/ 
